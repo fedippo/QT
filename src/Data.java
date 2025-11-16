@@ -71,6 +71,13 @@ public class Data {
         return data[exampleIndex][attributeIndex];
     }
 
+    Tuple getItemSet(int index){
+        Tuple tuple=new Tuple(attributeSet.length);
+        for(int i=0;i<attributeSet.length;i++)
+            tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet[i], (String)data[index][i]),i);
+        return tuple;
+    }
+
     public String toString(){
         String stampa = "Outlook,Temperature,Humidity,Wind,PlayTennis\n";
         for(int i=0;i<getNumberOfExamples();i++){
