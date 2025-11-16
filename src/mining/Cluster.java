@@ -1,3 +1,4 @@
+package mining;
 
 class Cluster {
 	private Tuple centroid;

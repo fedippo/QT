@@ -1,3 +1,5 @@
+package mining;
+
 public class QTMiner {
     private ClusterSet C;
     private double radius;

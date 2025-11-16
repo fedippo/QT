@@ -1,3 +1,5 @@
+package data;
+
 public class Tuple {
     private Item [] tuple;
 

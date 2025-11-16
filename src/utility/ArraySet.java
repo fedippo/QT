@@ -1,5 +1,6 @@
-import java.util.Arrays;
+package utility;
 
+import java.util.Arrays;
 
 class ArraySet {
 	private boolean set[];

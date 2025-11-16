@@ -1,3 +1,5 @@
+package mining;
+
 public class ClusterSet {
     private Cluster C[]=new Cluster[0];
 
