@@ -1,11 +1,13 @@
 package mining;
 
+import data.Data;
+
 public class ClusterSet {
     private Cluster C[]=new Cluster[0];
 
-    ClusterSet(){}
+    public ClusterSet(){}
 
-    void add(Cluster c){
+    public void add(Cluster c){
         Cluster tempC[]=new Cluster[C.length+1];
         for(int i=0;i<C.length;i++)
             tempC[i]=C[i];
@@ -13,7 +15,7 @@ public class ClusterSet {
         C=tempC;
     }
 
-    Cluster get(int i){
+    public Cluster get(int i){
         return C[i];
     }
 

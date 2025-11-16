@@ -5,7 +5,7 @@ public class Data {
     private int numberOfExamples;
     private Attribute attributeSet[];
 
-    Data(){
+    public Data(){
 
         data = new Object [][] {
                 {"sunny",    "hot",  "high",   "weak",   "no"},
@@ -57,23 +57,23 @@ public class Data {
 
     }
 
-    int getNumberOfExamples(){
+    public int getNumberOfExamples(){
         return numberOfExamples;
     }
 
-    int getNumberOfAttributes(){
+    public int getNumberOfAttributes(){
         return attributeSet.length;
     }
 
-    Attribute[] getAttributeSchema(){
+    public Attribute[] getAttributeSchema(){
         return attributeSet;
     }
 
-    Object getValue(int exampleIndex, int attributeIndex){
+    public Object getValue(int exampleIndex, int attributeIndex){
         return data[exampleIndex][attributeIndex];
     }
 
-    Tuple getItemSet(int index){
+    public Tuple getItemSet(int index){
         Tuple tuple=new Tuple(attributeSet.length);
         for(int i=0;i<attributeSet.length;i++)
             tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet[i], (String)data[index][i]),i);

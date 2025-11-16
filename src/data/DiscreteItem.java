@@ -7,7 +7,7 @@ public class DiscreteItem extends Item {
     }
 
     @Override
-    double distance(Object a) {
+    public double distance(Object a) {
         Item otherItem = (Item)a;
 
         if(this.getValue().equals(otherItem.getValue())) {return 0.0;}

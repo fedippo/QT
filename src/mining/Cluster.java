@@ -1,48 +1,52 @@
 package mining;
 
+import data.Data;
+import data.Tuple;
+import utility.ArraySet;
+
 class Cluster {
 	private Tuple centroid;
 
-	private ArraySet clusteredData; 
+	private ArraySet clusteredData;
 	
 	/*Cluster(){
 		
 	}*/
 
-	Cluster(Tuple centroid){
+	public Cluster(Tuple centroid){
 		this.centroid=centroid;
 		clusteredData=new ArraySet();
 		
 	}
 		
-	Tuple getCentroid(){
+	public Tuple getCentroid(){
 		return centroid;
 	}
 	
 	//return true if the tuple is changing cluster
-	boolean addData(int id){
+	public boolean addData(int id){
 		return clusteredData.add(id);
 		
 	}
 	
 	//verifica se una transazione � clusterizzata nell'array corrente
-	boolean contain(int id){
+	public boolean contain(int id){
 		return clusteredData.get(id);
 	}
 	
 
 	//remove the tuplethat has changed the cluster
-	void removeTuple(int id){
+	public void removeTuple(int id){
 		clusteredData.delete(id);
 		
 	}
 	
-	int  getSize(){
+	public int  getSize(){
 		return clusteredData.size();
 	}
 	
 	
-	int[] iterator(){
+	public int[] iterator(){
 		return clusteredData.toArray();
 	}
 	
@@ -54,11 +58,7 @@ class Cluster {
 		return str;
 		
 	}
-	
-	
 
-
-	
 	public String toString(Data data){
 		String str="Centroid=(";
 		for(int i=0;i<centroid.getLength();i++)

@@ -8,11 +8,11 @@ public class DiscreteAttribute extends Attribute {
         this.values=values;
     }
 
-    int getNumberOfDistinctValues() {
+    public int getNumberOfDistinctValues() {
         return values.length;
     }
 
-    String getValue(int i){
+    public String getValue(int i){
         return values[i];
     }
 }

@@ -15,7 +15,7 @@ public class Tuple {
         return tuple[i];
     }
 
-    void add(Item c, int i){
+    public void add(Item c, int i){
         tuple[i] = c;
     }
 

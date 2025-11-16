@@ -1,5 +1,8 @@
 package mining;
 
+import data.Data;
+import data.Tuple;
+
 public class QTMiner {
     private ClusterSet C;
     private double radius;
@@ -9,11 +12,11 @@ public class QTMiner {
         C=new ClusterSet();
     }
 
-    ClusterSet getC(){
+    public ClusterSet getC(){
         return C;
     }
 
-    int compute(Data data){
+    public int compute(Data data){
         int numclusters=0;
         boolean isClustered[]=new boolean[data.getNumberOfExamples()];
         for(int i=0;i<isClustered.length;i++)
@@ -37,7 +40,7 @@ public class QTMiner {
         return numclusters;
     }
 
-    Cluster buildCandidateCluster(Data data, boolean isClustered[]){
+    public Cluster buildCandidateCluster(Data data, boolean isClustered[]){
         Cluster bestCluster=null;
         int maxSize = 0;
 

@@ -4,16 +4,16 @@ abstract class Attribute {
     private String name;
     private int index;
 
-    Attribute(String name, int index) {
+    public Attribute(String name, int index) {
         this.name = name;
         this.index = index;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    int getIndex() {
+    public int getIndex() {
         return index;
     }
 
