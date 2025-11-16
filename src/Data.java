@@ -81,7 +81,7 @@ public class Data {
     public String toString(){
         String stampa = "Outlook,Temperature,Humidity,Wind,PlayTennis\n";
         for(int i=0;i<getNumberOfExamples();i++){
-            stampa+=i+1+":";
+            stampa+=i+":";
             for(int j=0;j<getNumberOfAttributes();j++){
                 stampa+=getValue(i,j)+",";
             }
