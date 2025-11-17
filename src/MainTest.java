@@ -1,4 +1,6 @@
 import data.Data;
+import mining.ClusteringRadiusException;
+import mining.EmptyDatasetException;
 import mining.QTMiner;
 import static keyboardinput.Keyboard.*;
 
@@ -8,28 +10,37 @@ public class MainTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		Data data =new Data();
 		System.out.println(data);
 
-		char choice = 'y';
+		char choice;
+		double radius;
 
 		do {
-			System.out.println("Insert radius (>0):");
-			double radius = readDouble();
+			do {
+				System.out.println("Insert radius (>0):");
+				radius = readDouble();
+			}while(radius<=0);
+
 			QTMiner qt = new QTMiner(radius);
-			int numIter = qt.compute(data);
-			if(numIter == 1) {
-				System.out.println("14 tuples in one cluster!");
-				continue;
+
+			try {
+
+				int numIter = qt.compute(data);
+				System.out.println("Number of clusters:" + numIter);
+				System.out.println(qt.getC().toString(data));
+
+			}catch(EmptyDatasetException e) {
+				System.out.println(e.getMessage());
+			}catch(ClusteringRadiusException e) {
+				System.out.println(e.getMessage());
 			}
-			System.out.println("Number of clusters:" + numIter);
-			System.out.println(qt.getC().toString(data));
+
 			do {
 				System.out.println("New execution? (y/n)");
 				choice = readChar();
 			}while(choice != 'y' && choice != 'n');
 		}while(choice=='y');
 	}
-
 }

@@ -16,8 +16,11 @@ public class QTMiner {
         return C;
     }
 
-    public int compute(Data data){
+    public int compute(Data data)throws ClusteringRadiusException, EmptyDatasetException{
         int numclusters=0;
+
+        if(data.getNumberOfExamples()==0){throw new EmptyDatasetException("The dataset is empty!");}
+
         boolean isClustered[]=new boolean[data.getNumberOfExamples()];
         for(int i=0;i<isClustered.length;i++)
             isClustered[i]=false;
@@ -37,6 +40,7 @@ public class QTMiner {
             }
             countClustered+=c.getSize();
         }
+        if(numclusters==1){throw new ClusteringRadiusException("14 tuples in one cluster!");}
         return numclusters;
     }
 
