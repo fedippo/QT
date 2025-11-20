@@ -1,9 +1,12 @@
 package data;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Data {
     private Object data[][];
     private int numberOfExamples;
-    private Attribute attributeSet[];
+    private List<Attribute> attributeSet = new LinkedList<>();
 
     public Data(){
 
@@ -26,34 +29,32 @@ public class Data {
 
         numberOfExamples=14;
 
-        attributeSet = new Attribute[5];
-
         String outLookValues[]=new String[3];
         outLookValues[0]="overcast";
         outLookValues[1]="rain";
         outLookValues[2]="sunny";
-        attributeSet[0] = new DiscreteAttribute("Outlook",0, outLookValues);
+        attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
 
         String TemperatureValues[]=new String[3];
         TemperatureValues[0]="hot";
         TemperatureValues[1]="mild";
         TemperatureValues[2]="cool";
-        attributeSet[1] = new DiscreteAttribute("Temperature",1, TemperatureValues);
+        attributeSet.add(new DiscreteAttribute("Temperature",1, TemperatureValues));
 
         String HumidityValues[]=new String[2];
         HumidityValues[0]="high";
         HumidityValues[1]="normal";
-        attributeSet[2] = new DiscreteAttribute("Humidity",2, HumidityValues);
+        attributeSet.add(new DiscreteAttribute("Humidity",2, HumidityValues));
 
         String WindValues[]=new String[2];
         WindValues[0]="weak";
         WindValues[1]="strong";
-        attributeSet[3] = new DiscreteAttribute("Humidity",3, WindValues);
+        attributeSet.add(new DiscreteAttribute("Humidity",3, WindValues));
 
         String PlayTennisValues[]=new String[2];
         PlayTennisValues[0]="no";
         PlayTennisValues[1]="yes";
-        attributeSet[4] = new DiscreteAttribute("PlayTennis",4, PlayTennisValues);
+        attributeSet.add(new DiscreteAttribute("PlayTennis",4, PlayTennisValues));
 
     }
 
@@ -62,11 +63,11 @@ public class Data {
     }
 
     public int getNumberOfAttributes(){
-        return attributeSet.length;
+        return attributeSet.size();
     }
 
     public Attribute[] getAttributeSchema(){
-        return attributeSet;
+        return  attributeSet.toArray(new Attribute[getNumberOfAttributes()]);
     }
 
     public Object getValue(int exampleIndex, int attributeIndex){
@@ -74,9 +75,9 @@ public class Data {
     }
 
     public Tuple getItemSet(int index){
-        Tuple tuple=new Tuple(attributeSet.length);
-        for(int i=0;i<attributeSet.length;i++)
-            tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet[i], (String)data[index][i]),i);
+        Tuple tuple=new Tuple(attributeSet.size());
+        for(int i=0;i<attributeSet.size();i++)
+            tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet.get(i), (String)data[index][i]),i);
         return tuple;
     }
 
