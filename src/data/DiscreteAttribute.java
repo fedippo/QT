@@ -9,7 +9,7 @@ public class DiscreteAttribute extends Attribute implements Iterable<String>{
 
     public DiscreteAttribute(String name, int index, String values[]) {
         super(name, index);
-        this.values = new TreeSet<>(Arrays.asList(values));
+        this.values = new TreeSet<>(Arrays.asList(values)); //DA CORREGGERE FORSE
     }
 
     public int getNumberOfDistinctValues() {

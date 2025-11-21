@@ -34,9 +34,8 @@ public class QTMiner {
 
             //Rimuovo tuple clusterizzate da dataset
 
-            int clusteredTupleId[]=c.iterator();
-            for(int i=0;i<clusteredTupleId.length;i++){
-                isClustered[clusteredTupleId[i]]=true;
+            for(int id : c){
+                isClustered[id]=true;
             }
             countClustered+=c.getSize();
         }
