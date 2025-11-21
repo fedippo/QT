@@ -2,28 +2,29 @@ package mining;
 
 import data.Data;
 
-public class ClusterSet {
-    private Cluster C[]=new Cluster[0];
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class ClusterSet implements Iterable<Cluster>{
+    private Set<Cluster> C = new TreeSet();
 
     public ClusterSet(){}
 
     public void add(Cluster c){
-        Cluster tempC[]=new Cluster[C.length+1];
-        for(int i=0;i<C.length;i++)
-            tempC[i]=C[i];
-        tempC[C.length]=c;
-        C=tempC;
+        C.add(c);
     }
 
-    public Cluster get(int i){
-        return C[i];
+    @Override
+    public Iterator<Cluster> iterator() {
+        return C.iterator();
     }
 
     public String toString() {
         String str = "";
-        for (int i = 0; i < C.length; i++) {
-            if (C[i] != null) {
-                str += C[i].getCentroid().toString() + "\n";
+        for (Cluster c : this) {
+            if (c != null) {
+                str += c.getCentroid().toString() + "\n";
             }
         }
         return str;
@@ -31,10 +32,12 @@ public class ClusterSet {
 
     public String toString(Data data){
         String str="";
-        for(int i=0;i<C.length;i++){
-            if (C[i]!=null){
-                str+=i+":"+C[i].toString(data)+"\n";
+        int i=1;
+        for(Cluster c : this){
+            if (c != null){
+                str += i + ":" + c.toString(data) + "\n";
             }
+            i++;
         }
         return str;
     }
