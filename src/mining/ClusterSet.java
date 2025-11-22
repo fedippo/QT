@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class ClusterSet implements Iterable<Cluster>{
-    private Set<Cluster> C = new TreeSet();
+    private Set<Cluster> C = new TreeSet<>();
 
     public ClusterSet(){}
 

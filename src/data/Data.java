@@ -11,20 +11,20 @@ public class Data {
     public Data(){
 
         data = new Object [][] {
-                {"sunny",    "hot",  "high",   "weak",   "no"},
-                {"sunny",    "hot",  "high",   "strong", "no"},
-                {"overcast", "hot",  "high",   "weak",   "yes"},
-                {"rain",     "mild", "high",   "weak",   "yes"},
-                {"rain",     "cool", "normal", "weak",   "yes"},
-                {"rain",     "cool", "normal", "strong", "no"},
-                {"overcast", "cool", "normal", "strong", "yes"},
-                {"sunny",    "mild", "high",   "weak",   "no"},
-                {"sunny",    "cool", "normal", "weak",   "yes"},
-                {"rain",     "mild", "normal", "weak",   "yes"},
-                {"sunny",    "mild", "normal", "strong", "yes"},
-                {"overcast", "mild", "high",   "strong", "yes"},
-                {"overcast", "hot",  "normal", "weak",   "yes"},
-                {"rain",     "mild", "high",   "strong", "no"}
+                {"sunny",    30.3,  "high",   "weak",   "no"},
+                {"sunny",    30.3,  "high",   "strong", "no"},
+                {"overcast", 30.0,  "high",   "weak",   "yes"},
+                {"rain",     13.0, "high",   "weak",   "yes"},
+                {"rain",      0.0, "normal", "weak",   "yes"},
+                {"rain",      0.0, "normal", "strong", "no"},
+                {"overcast",  0.1, "normal", "strong", "yes"},
+                {"sunny",    13.0, "high",   "weak",   "no"},
+                {"sunny",     0.1, "normal", "weak",   "yes"},
+                {"rain",     12.0, "normal", "weak",   "yes"},
+                {"sunny",    12.5, "normal", "strong", "yes"},
+                {"overcast", 12.5, "high",   "strong", "yes"},
+                {"overcast",29.21,  "normal", "weak",   "yes"},
+                {"rain",     12.5, "high",   "strong", "no"}
         };
 
         numberOfExamples=14;
@@ -35,11 +35,7 @@ public class Data {
         outLookValues[2]="sunny";
         attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
 
-        String TemperatureValues[]=new String[3];
-        TemperatureValues[0]="hot";
-        TemperatureValues[1]="mild";
-        TemperatureValues[2]="cool";
-        attributeSet.add(new DiscreteAttribute("Temperature",1, TemperatureValues));
+        attributeSet.add(new ContinuousAttribute("Temperature",1, 3.2, 38.7));
 
         String HumidityValues[]=new String[2];
         HumidityValues[0]="high";
@@ -76,8 +72,17 @@ public class Data {
 
     public Tuple getItemSet(int index){
         Tuple tuple=new Tuple(attributeSet.size());
-        for(int i=0;i<attributeSet.size();i++)
-            tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet.get(i), (String)data[index][i]),i);
+        for(int i=0;i<attributeSet.size();i++) {
+            Attribute attribute = attributeSet.get(i);
+
+            if (attribute instanceof DiscreteAttribute) {
+                tuple.add(new DiscreteItem((DiscreteAttribute) attribute, (String) data[index][i]), i);
+            }else if (attribute instanceof ContinuousAttribute) {
+                tuple.add(new ContinuousItem((ContinuousAttribute) attribute, (Double) data[index][i]), i);
+            }
+
+        }
+
         return tuple;
     }
 

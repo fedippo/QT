@@ -32,9 +32,9 @@ public class MainTest {
 				System.out.println(qt.getC().toString(data));
 
 			}catch(EmptyDatasetException e) {
-				System.out.println(e.getMessage());
+				System.err.println(e.getMessage());
 			}catch(ClusteringRadiusException e) {
-				System.out.println(e.getMessage());
+				System.err.println(e.getMessage());
 			}
 
 			do {
