@@ -2,11 +2,12 @@ package mining;
 
 import data.Data;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ClusterSet implements Iterable<Cluster>{
+public class ClusterSet implements Iterable<Cluster>, Serializable {
     private Set<Cluster> C = new TreeSet<>();
 
     public ClusterSet(){}
@@ -22,10 +23,12 @@ public class ClusterSet implements Iterable<Cluster>{
 
     public String toString() {
         String str = "";
+        int i=1;
         for (Cluster c : this) {
             if (c != null) {
-                str += c.getCentroid().toString() + "\n";
+                str += i + ":" + c.toString() + "\n";
             }
+            i++;
         }
         return str;
     }

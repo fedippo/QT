@@ -3,13 +3,29 @@ package mining;
 import data.Data;
 import data.Tuple;
 
-public class QTMiner {
+import java.io.*;
+
+public class QTMiner implements Serializable{
     private ClusterSet C;
-    private double radius;
+    private transient double radius;
 
     public QTMiner(double radius){
         this.radius=radius;
         C=new ClusterSet();
+    }
+
+    public QTMiner(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileInputStream inFile = new FileInputStream(fileName);
+        ObjectInputStream inStream = new ObjectInputStream(inFile);
+        this.C = (ClusterSet) inStream.readObject();
+        inStream.close();
+    }
+
+    public void salva(String fileName) throws FileNotFoundException, IOException{
+        FileOutputStream outFile = new FileOutputStream(fileName);
+        ObjectOutputStream outStream = new ObjectOutputStream(outFile);
+        outStream.writeObject(this.C);
+        outStream.close();
     }
 
     public ClusterSet getC(){

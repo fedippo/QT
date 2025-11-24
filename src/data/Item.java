@@ -1,7 +1,9 @@
 package data;
 
-abstract class Item {
-    private Attribute attribute;
+import java.io.Serializable;
+
+abstract class Item implements Serializable {
+    private transient Attribute attribute;
     private Object value;
 
     public Item(Attribute attribute, Object value) {

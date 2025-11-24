@@ -3,13 +3,14 @@ package mining;
 import data.Data;
 import data.Tuple;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-class Cluster implements Iterable<Integer>, Comparable<Cluster>{
+class Cluster implements Iterable<Integer>, Comparable<Cluster>, Serializable {
 	private Tuple centroid;
-	private Set<Integer> clusteredData;
+	private transient Set<Integer> clusteredData;
 	
 	/*Cluster(){
 		
@@ -55,10 +56,8 @@ class Cluster implements Iterable<Integer>, Comparable<Cluster>{
 	public int compareTo(Cluster c){
 		if(this.getSize()>c.getSize()){
 			return 1;
-		}else if(this.getSize()<c.getSize()){
-			return -1;
 		}else {
-			return 0;
+			return -1;
 		}
 	}
 	
