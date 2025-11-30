@@ -1,17 +1,27 @@
 import data.Data;
+import database.DatabaseConnectionException;
+import database.EmptySetException;
+import database.NoValueException;
 import mining.ClusteringRadiusException;
 import mining.EmptyDatasetException;
 import mining.QTMiner;
-
-import java.io.File;
-
+import java.sql.SQLException;
 import static keyboardinput.Keyboard.*;
 
+/**
+ * La classe MainTest è la classe principale per l'esecuzione del programma.
+ * Offre un menu interattivo per l'utente per scegliere tra il caricamento e
+ * l'analisi di dati da un database (Clustering QT) o il caricamento di un clustering salvato da file.
+ */
 public class MainTest {
 
-	/**
-	 * @param args
-	 */
+    /**
+     * Punto di ingresso principale del programma.
+     * Gestisce il loop del menu principale, consentendo all'utente di selezionare
+     * l'operazione desiderata fino a quando non decide di uscire.
+     *
+     * @param args Array di argomenti della riga di comando (non utilizzato).
+     */
 	public static void main(String[] args) {
 
         char choice = 'y';
@@ -27,7 +37,7 @@ public class MainTest {
             }
 
             if(selection == 1){caricaFile();}
-            else if(selection == 2){caricaData();}
+            else {caricaData();}
 
             do {
                 System.out.println("Would you choose another option from the menu?(y/n)");
@@ -36,6 +46,12 @@ public class MainTest {
         }
     }
 
+    /**
+     * Gestisce la logica per caricare un clustering salvato precedentemente su file.
+     * Chiede all'utente il nome del file, tenta di inizializzare l'oggetto QTMiner
+     * e stampa i risultati del clustering caricato.
+     * Gestisce eventuali eccezioni durante il caricamento del file.
+     */
     private static void caricaFile() {
         System.out.print("archive name:");
         String fileName = readString();
@@ -47,9 +63,28 @@ public class MainTest {
         }
     }
 
+    /**
+     * Gestisce la logica per il caricamento dei dati dal database e l'esecuzione dell'algoritmo
+     * di clustering QT (Quality Threshold).
+     * 1. Richiede il nome della tabella del database e carica i dati, gestendo le eccezioni di connessione/dati.
+     * 2. Se il caricamento ha successo, entra in un loop per eseguire l'algoritmo:
+     * a. Richiede all'utente un raggio (>0).
+     * b. Esegue il clustering (QTMiner.compute).
+     * c. Stampa il risultato del clustering (numero di cluster e descrizione).
+     * d. Offre la possibilità di salvare il risultato su file.
+     */
     private static void caricaData(){
-        Data data =new Data();
-        System.out.println(data);
+        System.out.print("dataset name:");
+        String TableName = readString();
+        Data data = null;
+
+        try {
+            data = new Data(TableName);
+            System.out.println(data);
+
+        }catch (DatabaseConnectionException | SQLException | EmptySetException | NoValueException e){
+            return;
+        }
 
         char choice = 'y';
 
@@ -68,9 +103,7 @@ public class MainTest {
                 System.out.println("Number of clusters:" + numIter);
                 System.out.println(qt.getC().toString(data));
 
-            }catch(EmptyDatasetException e) {
-                System.err.println(e.getMessage());
-            }catch(ClusteringRadiusException e) {
+            }catch(EmptyDatasetException | ClusteringRadiusException e) {
                 System.err.println(e.getMessage());
             }
 
